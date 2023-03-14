@@ -155,7 +155,6 @@ btn.addEventListener('click',(e)=>{
                 person.person1.wins=result.person1.wins
                 person.person1.losses=result.person1.losses
                 set(ref(db,`/game/players/1`),person.person1)
-                localStorage.setItem('chc','true')
             })
          })
          DataGoster1(person.person1);
@@ -168,13 +167,14 @@ btn.addEventListener('click',(e)=>{
          user.innerHTML=person.person2.name ?`Hi ${person.person2.name}` : ""
          DataGoster2(person.person2);
         
-         ply2_chc.forEach((ply2)=>{
+         ply2_chc.forEach(async(ply2)=>{
+            let getim=await get(ref(db,'/game/players/1'));
+            let getim_data=await getim.val()
             ply2.addEventListener('click',()=>{
-                if( localStorage.getItem('chc')){
+                if(getim_data.choice){
                 cho2.innerHTML=ply2.innerHTML;
                 person.person2.choice=ply2.innerHTML;
                 set(ref(db,`/game/players/2`),person.person2)
-                 localStorage.removeItem('chc')
                 }
             })  
          })
