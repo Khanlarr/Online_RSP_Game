@@ -1,0 +1,73 @@
+body{
+    margin: 5rem 0;
+}
+.section1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 7rem;
+    width: 100%;
+}
+.section2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: 20rem;
+    width: 100%;
+}
+.section2 .card{
+    min-height: 17rem;
+    width: 15rem;
+    padding: 1rem;
+    background-color: rgb(70, 56, 56);
+    color: wheat;
+    display: flex;
+    flex-direction: column;
+}
+.section2 .card2{
+   opacity: 0;
+}
+.section2 .card2.active{
+    opacity: 1;
+}
+.section2 .card .score{
+    display:  flex;
+    gap: 1rem;
+}
+.choices1{
+    display: none;
+}
+.choices1.active{
+    display: block;
+}
+.choices2{
+    display: none;
+}
+.choices2.active{
+    display: block;
+}
+.user_add.active{
+display: none;
+}
+.user{
+    margin-bottom: 3rem;
+}
+.chat{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20rem;
+}
+.chat textarea{
+     width: 40.5vw;
+}
+.chat input{
+    width: 34vw;
+}
+.chat button{
+    width: 6vw;
+}
