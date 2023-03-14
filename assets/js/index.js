@@ -45,7 +45,7 @@ const result={
 
 function DataGoster1(obj){
     if(obj?.name){
-    sessionStorage.setItem("playerr",obj?.name);
+    localStorage.setItem("playerr",obj?.name);
     ply1.innerHTML = obj?.name || 'Player1';
     winns[0].innerHTML= (typeof(obj?.wins)==='number')?('wins: '+obj?.wins): '';
     lossses[0].innerHTML=(typeof(obj?.losses)==='number')?('losses: '+obj?.losses) :''
@@ -58,7 +58,7 @@ function DataGoster1(obj){
 }
 function DataGoster2(obj){
     if(obj?.name){
-    if(!sessionStorage.getItem("playerr"))sessionStorage.setItem("playerr",obj?.name);
+    if(!localStorage.getItem("playerr"))localStorage.setItem("playerr",obj?.name);
     ply2.innerHTML = obj?.name || 'Player2';
     winns[1].innerHTML=(typeof(obj?.wins)==='number')?('wins: '+obj?.wins): ''
     lossses[1].innerHTML=(typeof(obj?.losses)==='number')?('losses: '+obj?.losses): ''
@@ -155,7 +155,7 @@ btn.addEventListener('click',(e)=>{
                 person.person1.wins=result.person1.wins
                 person.person1.losses=result.person1.losses
                 set(ref(db,`/game/players/1`),person.person1)
-                sessionStorage.setItem('chc','true')
+                localStorage.setItem('chc','true')
             })
          })
          DataGoster1(person.person1);
@@ -170,11 +170,11 @@ btn.addEventListener('click',(e)=>{
         
          ply2_chc.forEach((ply2)=>{
             ply2.addEventListener('click',()=>{
-                if( sessionStorage.getItem('chc')){
+                if( localStorage.getItem('chc')){
                 cho2.innerHTML=ply2.innerHTML;
                 person.person2.choice=ply2.innerHTML;
                 set(ref(db,`/game/players/2`),person.person2)
-                sessionStorage.removeItem('chc')
+                 localStorage.removeItem('chc')
                 }
             })  
          })
@@ -190,7 +190,7 @@ const Chat_Goster=(arr)=>{
 }
 onValue(ref(db,'/game/chats'),async snap=>{
     var obj = await snap.val() || {};
-    if(user.innerHTML.includes(sessionStorage.getItem('playerr'))){Chat_Goster(obj?.[0]);}
+    if(user.innerHTML.includes(localStorage.getItem('playerr'))){Chat_Goster(obj?.[0]);}
     else {Chat_Goster(obj?.[1]);}
 })
 btn_chat.addEventListener('click',(e)=>{
@@ -205,7 +205,7 @@ btn_chat.addEventListener('click',(e)=>{
     e.preventDefault();
 })
 window.addEventListener('beforeunload',(e)=>{
-    if(user.innerHTML.includes(sessionStorage.getItem('playerr'))){
+    if(user.innerHTML.includes(localStorage.getItem('playerr'))){
     remove(ref(db,`/game/players/1`));
     remove(ref(db,`/game/chats/0`));
     }
@@ -214,5 +214,6 @@ window.addEventListener('beforeunload',(e)=>{
     remove(ref(db,`/game/chats/1`));
     }
 
+    
     e.preventDefault()
 })
