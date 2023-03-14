@@ -167,17 +167,18 @@ btn.addEventListener('click',(e)=>{
          user.innerHTML=person.person2.name ?`Hi ${person.person2.name}` : ""
          DataGoster2(person.person2);
         
-         ply2_chc.forEach(async(ply2)=>{
-            let getim=await get(ref(db,'/game/players/1'));
-            let getim_data=await getim.val()
-            ply2.addEventListener('click',()=>{
-                if(getim_data.choice){
-                cho2.innerHTML=ply2.innerHTML;
-                person.person2.choice=ply2.innerHTML;
-                set(ref(db,`/game/players/2`),person.person2)
-                }
-            })  
-         })
+         onValue(ref(db,'/game/players/1'),async snap=>{
+            var obj = await snap.val() || {};
+            ply2_chc.forEach(async(ply2)=>{
+                ply2.addEventListener('click',()=>{
+                    if(obj.choice){
+                    cho2.innerHTML=ply2.innerHTML;
+                    person.person2.choice=ply2.innerHTML;
+                    set(ref(db,`/game/players/2`),person.person2)
+                    }
+                })  
+             })
+        })
     }  
     input.value='';
     e.preventDefault();
